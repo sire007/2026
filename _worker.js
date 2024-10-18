@@ -54,11 +54,13 @@ function newUrl(urlStr) {
 }
 
 
-addEventListener('fetch', e => {
+export default {
+	async fetch(request, env, ctx) {
     const ret = fetchHandler(e)
         .catch(err => makeRes('cfworker error:\n' + err.stack, 502))
     e.respondWith(ret)
-})
+    }
+}
 
 
 function checkUrl(u) {
