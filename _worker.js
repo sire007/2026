@@ -1,5 +1,7 @@
 'use strict'
 
+let 屏蔽爬虫UA = ['netcraft'];
+
 // 前缀，如果自定义路由为example.com/gh/*，将PREFIX改为 '/gh/'，注意，少一个杠都会错！
 const PREFIX = '/' // 路由前缀
 // 分支文件使用jsDelivr镜像的开关，0为关闭，默认关闭
@@ -148,6 +150,18 @@ export default {
 		const url = new URL(request.url)
 		const urlStr = request.url
 		const urlObj = new URL(urlStr)
+
+		if (env.UA) 屏蔽爬虫UA = 屏蔽爬虫UA.concat(await ADD(env.UA));
+		const userAgentHeader = request.headers.get('User-Agent');
+		const userAgent = userAgentHeader ? userAgentHeader.toLowerCase() : "null";
+		if (屏蔽爬虫UA.some(fxxk => userAgent.includes(fxxk)) && 屏蔽爬虫UA.length > 0) {
+			// 首页改成一个nginx伪装页
+			return new Response(await nginx(), {
+				headers: {
+					'Content-Type': 'text/html; charset=UTF-8',
+				},
+			});
+		} 
 		let path = urlObj.searchParams.get('q')
 		if (path) {
 			return Response.redirect('https://' + urlObj.host + PREFIX + path, 301) // 重定向到带前缀的路径
@@ -424,4 +438,43 @@ async function githubInterface() {
 		</html>
 	`;
 	return html;
+}
+
+async function ADD(envadd) {
+	var addtext = envadd.replace(/[	 |"'\r\n]+/g, ',').replace(/,+/g, ',');	// 将空格、双引号、单引号和换行符替换为逗号
+	if (addtext.charAt(0) == ',') addtext = addtext.slice(1);
+	if (addtext.charAt(addtext.length - 1) == ',') addtext = addtext.slice(0, addtext.length - 1);
+	const add = addtext.split(',');
+	return add;
+}
+
+async function nginx() {
+	const text = `
+	<!DOCTYPE html>
+	<html>
+	<head>
+	<title>Welcome to nginx!</title>
+	<style>
+		body {
+			width: 35em;
+			margin: 0 auto;
+			font-family: Tahoma, Verdana, Arial, sans-serif;
+		}
+	</style>
+	</head>
+	<body>
+	<h1>Welcome to nginx!</h1>
+	<p>If you see this page, the nginx web server is successfully installed and
+	working. Further configuration is required.</p>
+	
+	<p>For online documentation and support please refer to
+	<a href="http://nginx.org/">nginx.org</a>.<br/>
+	Commercial support is available at
+	<a href="http://nginx.com/">nginx.com</a>.</p>
+	
+	<p><em>Thank you for using nginx.</em></p>
+	</body>
+	</html>
+	`
+	return text;
 }
