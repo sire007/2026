@@ -5,7 +5,7 @@ github release、archive以及项目文件的加速项目，支持clone，Cloudf
 
 ## 使用
 
-直接在copy出来的url前加`https://Github.fxxk.dedyn.io/`即可
+直接在copy出来的url前加`https://Github.cmliussss.net/`即可
 
 也可以直接访问，在input输入
 
@@ -13,7 +13,7 @@ github release、archive以及项目文件的加速项目，支持clone，Cloudf
 
 访问私有仓库可以通过
 
-`git clone https://user:TOKEN@github.fxxk.dedyn.io/https://github.com/xxxx/xxxx` [#71](https://github.com/hunshcn/gh-proxy/issues/71)
+`git clone https://user:TOKEN@github.cmliussss.net/https://github.com/xxxx/xxxx` [#71](https://github.com/hunshcn/gh-proxy/issues/71)
 
 以下都是合法输入（仅示例，文件不存在）：
 
@@ -38,7 +38,7 @@ github release、archive以及项目文件的加速项目，支持clone，Cloudf
 ### 2. 给 Pages绑定 自定义域：
    - 在 Pages控制台的 `自定义域`选项卡，下方点击 `设置自定义域`。
    - 填入你的自定义次级域名，注意不要使用你的根域名，例如：
-     您分配到的域名是 `fxxk.dedyn.io`，则添加自定义域填入 `github.fxxk.dedyn.io`即可；
+     您分配到的域名是 `cmliussss.net`，则添加自定义域填入 `github.cmliussss.net`即可；
    - 按照 Cloudflare 的要求将返回你的域名DNS服务商，添加 该自定义域 `github`的 CNAME记录 `CF-Workers-GitHub.pages.dev` 后，点击 `激活域`即可。
 
 ## Workers 部署方法
