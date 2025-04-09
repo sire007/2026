@@ -161,7 +161,7 @@ export default {
 					'Content-Type': 'text/html; charset=UTF-8',
 				},
 			});
-		} 
+		}
 		let path = urlObj.searchParams.get('q')
 		if (path) {
 			return Response.redirect('https://' + urlObj.host + PREFIX + path, 301) // 重定向到带前缀的路径
@@ -192,11 +192,24 @@ export default {
 			const newUrl = path.replace(/(?<=com\/.+?\/.+?)\/(.+?\/)/, '@$1').replace(/^(?:https?:\/\/)?raw\.(?:githubusercontent|github)\.com/, 'https://cdn.jsdelivr.net/gh') // 修改为jsDelivr镜像URL
 			return Response.redirect(newUrl, 302) // 重定向到新的URL
 		} else {
-			return new Response(await githubInterface(), {
-				headers: {
-					'Content-Type': 'text/html; charset=UTF-8',
-				},
-			});
+			if (env.URL302) {
+				return Response.redirect(env.URL302, 302);
+			} else if (env.URL) {
+				if (env.URL.toLowerCase() == 'nginx') {
+					//首页改成一个nginx伪装页
+					return new Response(await nginx(), {
+						headers: {
+							'Content-Type': 'text/html; charset=UTF-8',
+						},
+					});
+				} else return fetch(new Request(env.URL, request));
+			} else {
+				return new Response(await githubInterface(), {
+					headers: {
+						'Content-Type': 'text/html; charset=UTF-8',
+					},
+				});
+			}
 		}
 	}
 }

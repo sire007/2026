@@ -1,9 +1,9 @@
-# CF-Workers-GitHub
+# ⚡ CF-Workers-GitHub
 ![img](./img.png)
-## 简介
+## 📝 简介
 github release、archive以及项目文件的加速项目，支持clone，Cloudflare Workers & Pages 版本
 
-## 使用
+## 🚀 使用
 
 直接在copy出来的url前加`https://Github.cmliussss.net/`即可
 
@@ -29,24 +29,29 @@ github release、archive以及项目文件的加速项目，支持clone，Cloudf
 
 - gist：https://gist.githubusercontent.com/cielpy/351557e6e465c12986419ac5a4dd2568/raw/cmd.py
 
-## Pages Github 部署
+## 📄 Pages Github 部署
 
-### 1. 部署 Cloudflare Pages：
+### 1️⃣ 部署 Cloudflare Pages：
    - 在 Github 上先 Fork 本项目，并点上 Star !!!
    - 在 Cloudflare Pages 控制台中选择 `连接到 Git`后，选中 `CF-Workers-GitHub`项目后点击 `开始设置`。
      
-### 2. 给 Pages绑定 自定义域：
+### 2️⃣ 给 Pages绑定 自定义域：
    - 在 Pages控制台的 `自定义域`选项卡，下方点击 `设置自定义域`。
    - 填入你的自定义次级域名，注意不要使用你的根域名，例如：
      您分配到的域名是 `cmliussss.net`，则添加自定义域填入 `github.cmliussss.net`即可；
    - 按照 Cloudflare 的要求将返回你的域名DNS服务商，添加 该自定义域 `github`的 CNAME记录 `CF-Workers-GitHub.pages.dev` 后，点击 `激活域`即可。
 
-## Workers 部署方法
-### 部署 Cloudflare Worker：
+## 👷 Workers 部署方法
+### ☁️ 部署 Cloudflare Worker：
 
    - 在 Cloudflare Worker 控制台中创建一个新的 Worker。
    - 将 [_worker.js](https://github.com/cmliu/CF-Workers-GitHub/blob/main/_worker.js)  的内容粘贴到 Worker 编辑器中。
 
+## 🔧 变量说明
+| 变量名 | 示例 | 必填 | 备注 |
+|--|--|--|--|
+| URL302 | `https://t.me/CMLiussss` |❌| 主页302跳转 |
+| URL | `https://www.baidu.com/` |❌| 主页伪装(设为`nginx`则伪装为nginx默认页面) |
 
-# 致谢
+# 🙏 致谢
 [gh-proxy](https://github.com/hunshcn/gh-proxy)、[jsproxy](https://github.com/EtherDream/jsproxy/)
