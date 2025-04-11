@@ -7,7 +7,7 @@ github release、archive以及项目文件的加速项目，支持clone，Cloudf
 > **Github.fxxk.dedyn.io 已被GFW污染，生产环境建议自行部署服务。**
 
 > [!WARNING]
-> 自定义域名可能触发安全警告或域名封禁，请通过环境变量 `URL` 或 `URL302` 设置可信镜像域名进行伪装。
+> 自定义域名可能触发钓鱼警告或域名封禁，请通过环境变量 `URL` 或 `URL302` 设置可信镜像域名进行伪装。
 
 ## 🚀 使用
 
